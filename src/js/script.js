@@ -89,6 +89,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -152,10 +153,21 @@
          for(let optionID in param.options){
           const option = param.options[optionID];
           const optionSelected = formData.hasOwnProperty(paramID) && formData[paramID].indexOf(optionID) > -1;
+          const images = document.querySelectorAll('.' + paramID + '-' + optionID)
           if(optionSelected && !option.default){
             price += option.price;
           } else if (!optionSelected && option.default){
             price -=option.price;
+          }
+          if(optionSelected){
+            for(let img of images){
+              img.classList.add(classNames.menuProduct.imageVisible);
+            }
+
+          } else {
+            for(let img of images){
+              img.classList.remove(classNames.menuProduct.imageVisible);
+            }
           }
         }
       }
