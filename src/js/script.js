@@ -1,4 +1,5 @@
-/* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
+/* global Handlebars, utils, dataSource */ 
+//eslint-disable-line no-unused-vars
 
 {
   'use strict';
@@ -105,7 +106,6 @@
       const thisProduct = this;
 
       /** generate HTML based on template */
-      //tworzę zmienną generatedHTML i wywołuję mętodę templates.menuProduct i przekazuję je dane produktu - atrybut
       const generatedHTML = templates.menuProduct(thisProduct.data);
 
 
@@ -329,21 +329,6 @@
 
     }
 
-    ///////alter to practice //////
-
-    //   if (this.isValid(thisWidget.value, newValue)) {
-    //         thisWidget.value = newValue;
-    //         thisWidget.anounce();
-    //       }
-    // thisWidget.input.value = thisWidget.value;
-    // }
-
-    // isValid(oldValue, newValue){
-    //   return newValue != oldValue &&
-    //   newValue >= settings.amountWidget.defaultMin &&
-    //   newValue <= settings.amountWidget.defaultMax
-    // }
-
     initActions () {
 
       const thisWidget = this;
@@ -399,7 +384,6 @@
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
-      //thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
 
       /* [NEW] current sums */
       thisCart.renderTotalsKeys = ['totalNumber', 'totalPrice', 'subtotalPrice', 'deliveryFee'];
@@ -432,7 +416,6 @@
     add(menuProduct) {
       const thisCart = this;
       /** generate HTML based on template */
-      //tworzę zmienną generatedHTML i wywołuję mętodę templates.cartProduct i przekazuję jej cały obiekt produktu.
       const generatedHTML = templates.cartProduct(menuProduct);
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
       thisCart.dom.productList.appendChild(generatedDOM);
@@ -447,14 +430,10 @@
 
       const cartProducts = thisCart.products;
       for(let cartProduct of cartProducts){
-      //                                                           console.log(cartProduct);
         thisCart.subtotalPrice += cartProduct.price;
         thisCart.totalNumber =+ cartProduct.amount;
-      //                                                           console.log('cartProduct.price',cartProduct.price);
-      //                                                           console.log('cartProduct.amount', cartProduct.amount);
       }
       thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
-      //                                                           console.log('thisCart.totalPrice', thisCart.totalPrice);
 
       for(let key of thisCart.renderTotalsKeys) {
         for(let elem of thisCart.dom[key]) {
@@ -471,8 +450,6 @@
       const index = thisCart.products.indexOf(cartProduct);
 
       const removedElementIndex = thisCart.products.splice(index);
-
-      //const  removed = thisCart.products;
 
       cartProduct.dom.wrapper.remove();
 
