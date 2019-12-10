@@ -1,5 +1,5 @@
-/* global Handlebars, utils, dataSource */ 
-//eslint-disable-line no-unused-vars
+/* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
+
 
 {
   'use strict';
@@ -72,12 +72,17 @@
       defaultValue: 1,
       defaultMin: 1,
       defaultMax: 9,
-    }, // CODE CHANGED
-    // CODE ADDED START
+    }, 
+    
     cart: {
       defaultDeliveryFee: 20,
     },
-    // CODE ADDED END
+    db: {
+      url: '//localhost:3131',
+      product: 'product',
+      order: 'order',
+    },
+    
   };
 
   const templates = {
@@ -95,7 +100,7 @@
 
       thisProduct.renderInMenu();
       thisProduct.getElements();
-      thisProduct.initAccordion(); //wywołanie metody
+      thisProduct.initAccordion(); 
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
@@ -110,8 +115,7 @@
 
 
       /** create element using utils.createElementPromHTML */
-      //////////////////////  method                ///////////////
-      //element DOM o właściwości instancji  ??//
+    
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
 
       /** find menu container */
@@ -121,7 +125,7 @@
     }
 
     getElements(){
-      const thisProduct =this;
+      const thisProduct = this;
 
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
@@ -278,6 +282,7 @@
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      // eslint-disable-next-line no-unused-vars
       thisProduct.amountWidgetElem.addEventListener('updated', function(event) {
         thisProduct.processOrder();
       });
@@ -393,7 +398,7 @@
       }
 
     }
-
+    // eslint-disable-next-line no-unused-vars
     initActions(element) {
       const thisCart = this;
 
@@ -446,9 +451,9 @@
     remove(cartProduct) {
 
       const thisCart = this;
-
+      // eslint-disable-next-line no-unused-vars
       const index = thisCart.products.indexOf(cartProduct);
-
+      // eslint-disable-next-line no-unused-vars
       const removedElementIndex = thisCart.products.splice(index);
 
       cartProduct.dom.wrapper.remove();
@@ -496,13 +501,14 @@
     initAmountWidget() {
       const thisCartProduct = this;
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+      // eslint-disable-next-line no-unused-vars
       thisCartProduct.dom.amountWidget.addEventListener('updated', function(event) {
         thisCartProduct.amount = thisCartProduct.amountWidget.value;
         thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
       });
     }
-
+    // eslint-disable-next-line no-unused-vars
     remove(productList) {
       const thisCartProduct = this;
 
@@ -537,13 +543,28 @@
       const thisApp = this;
 
       for (let productData in thisApp.data.products ) {
-        new Product (productData, thisApp.data.products[productData]);
+        new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
       }
     },
 
     initData: function () {
       const thisApp = this;
-      thisApp.data = dataSource;
+
+      thisApp.data = {};
+      const url = settings.db.url + '/' + settings.db.product;
+      console.log(url);
+      fetch(url)
+      // eslint-disable-next-line no-unused-vars
+        .then(function(rawResponse){
+        })
+        .then(function(parsedResponse){
+          console.log('parsedResponse', parsedResponse);
+          /* save parsedResponse as thisApp.data.products */
+          thisApp.data.products = parsedResponse;
+          /* execute initMenu method */
+          thisApp.initMenu();
+        });
+      console.log('thisApp.data', JSON.stringify(thisApp.data));
     },
 
     initCart: function() {
@@ -562,7 +583,6 @@
       console.log('settings:', settings);
       console.log('templates:', templates);
       thisApp.initData();
-      thisApp.initMenu();
       thisApp.initCart();
 
 
