@@ -77,6 +77,7 @@
     cart: {
       defaultDeliveryFee: 20,
     },
+
     db: {
       url: '//localhost:3131',
       product: 'product',
@@ -552,10 +553,11 @@
 
       thisApp.data = {};
       const url = settings.db.url + '/' + settings.db.product;
-      console.log(url);
+  
       fetch(url)
       // eslint-disable-next-line no-unused-vars
         .then(function(rawResponse){
+          return rawResponse.json();
         })
         .then(function(parsedResponse){
           console.log('parsedResponse', parsedResponse);
