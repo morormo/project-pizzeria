@@ -422,11 +422,17 @@
     }
 
     sendOrder(){
-      //const url = settings.db.url + '/' + settings.db.order;
-
+      const thisCart = this;
+      const url = settings.db.url + '/' + settings.db.order;
+      
       const payload = {
-        address: 'test',
+        phone: thisCart.dom.inputPhone,
+        adress: thisCart.dom.inputAddress,
+        totalNumber: thisCart.totalNumber,
+        subtotalPrice: thisCart.subtotalPrice,
         totalPrice: thisCart.totalPrice,
+        deliveryFee: thisCart.deliveryFee,
+        products : [],
       };
 
       const options = {
@@ -436,6 +442,13 @@
         },
         body: JSON.stringify(payload),
       };
+
+      fetch(url, options)
+        .then(function(response) {
+          return response.json();
+        }).then (function(parsedResponse){
+          console.log('parsedResponse', parsedResponse);
+        });
     }
 
 
