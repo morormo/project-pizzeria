@@ -3,6 +3,12 @@ import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 
 const app = {
+  initBooking: function(){
+    const thisApp = this;
+    const bookingElem = document.querySelector(selec.containerOf.booking);
+    thisApp.booking = new Booking(bookingElem);
+  }
+
   initPages : function() {
     const thisApp = this;
 
@@ -113,6 +119,7 @@ const app = {
     //console.log('templates:', templates);
 
     thisApp.initPages();
+    thisApp.initBooking();
 
     thisApp.initData();
     //thisApp.initMenu();
