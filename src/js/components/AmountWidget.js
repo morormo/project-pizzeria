@@ -1,9 +1,9 @@
-import { settings, select } from './settings.js';
+import {settings, select} from '../settings.js';
 
 class AmountWidget {
 
   constructor(element) {
-    const thisWidget = this;
+    const thisWidget = this ;
 
     thisWidget.getElements(element);
     thisWidget.value = settings.amountWidget.defaultValue;
@@ -13,6 +13,7 @@ class AmountWidget {
 
   getElements(element) {
     const thisWidget = this;
+
     thisWidget.element = element;
     thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
     thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
@@ -20,6 +21,7 @@ class AmountWidget {
   }
 
   setValue(value) {
+
     const thisWidget = this;
 
     const newValue = parseInt(value);
@@ -29,27 +31,30 @@ class AmountWidget {
       thisWidget.anounce();
     }
     thisWidget.input.value = thisWidget.value;
-
   }
-  initActions() {
+
+  initActions () {
 
     const thisWidget = this;
 
-    thisWidget.input.addEventListener('change', function () {
-      thisWidget.setValue(thisWidget.input.value);
+    thisWidget.input.addEventListener('change', function() {
+      thisWidget.setValue(thisWidget.input.value );
     });
-    thisWidget.linkIncrease.addEventListener('click', function (event) {
+    thisWidget.linkIncrease.addEventListener('click', function(event) {
+
       event.preventDefault();
       thisWidget.setValue(thisWidget.value + 1);
     });
 
-    thisWidget.linkDecrease.addEventListener('click', function (event) {
+    thisWidget.linkDecrease.addEventListener('click', function(event) {
+
       event.preventDefault();
       thisWidget.setValue(thisWidget.value - 1);
     });
   }
 
   anounce() {
+
     const thisWidget = this;
 
     const event = new CustomEvent('updated', {

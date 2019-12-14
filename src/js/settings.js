@@ -1,4 +1,4 @@
-import Handlebars from './utils.js';
+/* global Handlebars */
 export const select = {
   templateOf: {
     menuProduct: '#template-menu-product',
@@ -67,18 +67,19 @@ export const settings = {
     defaultValue: 1,
     defaultMin: 1,
     defaultMax: 9,
-  },
-
+  }, // CODE CHANGED
+  // CODE ADDED START
   cart: {
     defaultDeliveryFee: 20,
   },
-  db: {
+  //CODE ADDED END
+  db:{
     url: '//localhost:3131',
     product: 'product',
     order: 'order',
   },
-
 };
+
 export const templates = {
   menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   // CODE ADDED START
