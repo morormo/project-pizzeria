@@ -21,12 +21,14 @@ class Booking {
         //console.log(thisBooking.dom.peopleAmount);
         thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
         //console.log(thisBooking.dom.hoursAmount);
+        thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     }
     initWidgets(){
         const thisBooking = this;
 
         thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
         thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
+        thisBooking.datePicker = new AmountWidget(thisBooking.dom.datePicker);
     }
 }
 export default Booking;
