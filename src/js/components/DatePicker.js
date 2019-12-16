@@ -7,9 +7,11 @@ class datePicker extends BaseWidget{
   constructor(wrapper){  
     super(wrapper, utils.dateToStr(new Date()));
     const thisWidget = this;
-    thisWidget.dom.input = thisWidget.dom.wrapper.qurySelector(select.widgets.date.Picker.input);
+    thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.datePicker.input);
 
     thisWidget.initPlugin();
+
+    thisWidget.value = thisWidget.dom.input.value;
 
   }
   initPlugin(){
@@ -32,7 +34,7 @@ class datePicker extends BaseWidget{
         }
       ],
       locale: {
-        'firstDayOfWeek': 1 // start week on Monday
+        'firstDayOfWeek': 2 // start week on Monday
       }
     });
   }
