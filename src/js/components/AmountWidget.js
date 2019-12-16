@@ -9,11 +9,7 @@ class AmountWidget extends BaseWidget {
 
     thisWidget.getElements(element);
     
-<<<<<<< HEAD
-    thisWidget.initActions();
-=======
     thisWidget.initActions(thisWidget.value);
->>>>>>> Problem with addEventListener
   }
 
   getElements() {
