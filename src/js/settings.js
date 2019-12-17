@@ -101,14 +101,14 @@ export const settings = {
   },
   datePicker: {
     maxDaysInFuture: 14,
-  },  
+  },
   cart: {
     defaultDeliveryFee: 20,
   },
   booking: {
     tableIdAttribute: 'data-table',
-  },  
-  db:{
+  },
+  db: {
     url: '//localhost:3131',
     product: 'product',
     order: 'order',

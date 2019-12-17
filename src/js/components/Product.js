@@ -1,5 +1,5 @@
-import {select, classNames, templates} from '../settings.js';
-import {utils} from '../utils.js';
+import { select, classNames, templates } from '../settings.js';
+import { utils } from '../utils.js';
 import AmountWidget from './AmountWidget.js';
 class Product {
   constructor(id, data) {
@@ -33,8 +33,8 @@ class Product {
     menuContainer.appendChild(thisProduct.element);
   }
 
-  getElements(){
-    const thisProduct =this;
+  getElements() {
+    const thisProduct = this;
 
     thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
     thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
@@ -46,14 +46,14 @@ class Product {
   }
 
 
-  initAccordion(){
+  initAccordion() {
     const thisProduct = this;
 
     /** find the clickable trigger (the element that should react to cliking ) */
     const clicableTrigger = thisProduct.accordionTrigger;
 
     /** START : click event listener to triger */
-    clicableTrigger.addEventListener('click', function(){
+    clicableTrigger.addEventListener('click', function () {
 
       /** prevent default action for event */
       event.preventDefault();
@@ -65,10 +65,10 @@ class Product {
       const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
 
       /**  START LOOP: for each active produkt */
-      for (let activeProduct of activeProducts){
+      for (let activeProduct of activeProducts) {
 
         /**  START: if the active product isn't the element of thisProdukt  */
-        if (activeProduct != thisProduct.element){
+        if (activeProduct != thisProduct.element) {
 
           /** remove class active for the active product */
           activeProduct.classList.remove('active');
@@ -83,21 +83,21 @@ class Product {
     });
   }
 
-  initOrderForm(){
+  initOrderForm() {
     const thisProduct = this;
 
-    thisProduct.form.addEventListener('submit', function(event){
+    thisProduct.form.addEventListener('submit', function (event) {
       event.preventDefault();
       thisProduct.processOrder();
     });
 
-    for(let input of thisProduct.formInputs){
-      input.addEventListener('change', function(){
+    for (let input of thisProduct.formInputs) {
+      input.addEventListener('change', function () {
         thisProduct.processOrder();
       });
     }
 
-    thisProduct.cartButton.addEventListener('click', function(event){
+    thisProduct.cartButton.addEventListener('click', function (event) {
       event.preventDefault();
       thisProduct.processOrder();
       thisProduct.addToCart();
@@ -105,7 +105,7 @@ class Product {
     });
   }
 
-  processOrder(){
+  processOrder() {
     const thisProduct = this;
 
     /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
@@ -122,22 +122,22 @@ class Product {
 
       /* START LOOP: for each optionId in param.options */
       for (let optionId in param.options) {
-      /* save the element in param.options with key optionId as const option */
+        /* save the element in param.options with key optionId as const option */
         const option = param.options[optionId];
 
         const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
 
         /* START IF: if option is selected and option is not default */
-        if(optionSelected && !option.default){
+        if (optionSelected && !option.default) {
 
           /* add price of option to variable price */
-          price += option.price ;
+          price += option.price;
 
-        /* END IF: if option is selected and option is not default */
+          /* END IF: if option is selected and option is not default */
         }
 
         /* START ELSE IF: if option is not selected and option is default */
-        else if (!optionSelected && option.default ) {
+        else if (!optionSelected && option.default) {
 
           /* deduct price of option from price */
           price -= option.price;
@@ -146,14 +146,14 @@ class Product {
         }
 
         /**[NEW] find all images with class active */
-        const activeImages = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId );
+        const activeImages = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
 
         /**[NEW] START IF ELSE: if option is selected add active class classNames.MenuProduct.imageVisible */
         if (optionSelected && activeImages) {
           activeImages.classList.add(classNames.menuProduct.imageVisible);
 
           /** [NEW NEW LOOP: new place of the loop ] */
-          if(!thisProduct.params[paramId]) {
+          if (!thisProduct.params[paramId]) {
 
             thisProduct.params[paramId] = {
 
@@ -165,15 +165,15 @@ class Product {
           /*[NEW NEW END LOOP ]
         /**[NEW] ELSE :  option is not selected  remove class active in classNamess.menuProduct.imageisible */
         } else {
-          if(activeImages){
+          if (activeImages) {
             activeImages.classList.remove(classNames.menuProduct.imageVisible);
 
             /**[NEW] END IF ELSE LOOP */
           }
         }
-      /* END LOOP: for each optionId in param.options */
+        /* END LOOP: for each optionId in param.options */
       }
-    /* END LOOP: for each paramId in thisProduct.data.params */
+      /* END LOOP: for each paramId in thisProduct.data.params */
     }
     /* set the contents of thisProduct.priceElem to be the value of variable price */
     /** multiply price by amount */
@@ -189,15 +189,15 @@ class Product {
 
     thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
     // eslint-disable-next-line no-unused-vars
-    thisProduct.amountWidgetElem.addEventListener('updated', function(event) {
+    thisProduct.amountWidgetElem.addEventListener('updated', function (event) {
       thisProduct.processOrder();
     });
   }
 
-  addToCart(){
+  addToCart() {
     const thisProduct = this;
     thisProduct.name = thisProduct.data.name;
-    thisProduct.amount =  thisProduct.amountWidget.value;
+    thisProduct.amount = thisProduct.amountWidget.value;
 
     //app.cart.add(thisProduct);
 

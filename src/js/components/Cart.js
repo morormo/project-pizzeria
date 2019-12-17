@@ -1,5 +1,5 @@
-import {settings, select, classNames, templates} from '../settings.js';
-import {utils} from '../utils.js';
+import { settings, select, classNames, templates } from '../settings.js';
+import { utils } from '../utils.js';
 import CartProduct from './CartProduct.js';
 
 class Cart {
@@ -29,7 +29,7 @@ class Cart {
 
     /* [NEW] current sums */
     thisCart.renderTotalsKeys = ['totalNumber', 'totalPrice', 'subtotalPrice', 'deliveryFee'];
-    for(let key of thisCart.renderTotalsKeys) {
+    for (let key of thisCart.renderTotalsKeys) {
       thisCart.dom[key] = thisCart.dom.wrapper.querySelectorAll(select.cart[key]);
     }
   }
@@ -38,25 +38,25 @@ class Cart {
   initActions(element) {
     const thisCart = this;
 
-    thisCart.dom.toggleTrigger.addEventListener('click', function(){
+    thisCart.dom.toggleTrigger.addEventListener('click', function () {
       thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
     });
 
-    thisCart.dom.productList.addEventListener('updated', function(){
+    thisCart.dom.productList.addEventListener('updated', function () {
       thisCart.update();
     });
 
-    thisCart.dom.productList.addEventListener('remove', function(event){
+    thisCart.dom.productList.addEventListener('remove', function (event) {
       thisCart.remove(event.detail.cartProduct);
     });
 
-    thisCart.dom.form.addEventListener('submit', function(event){
+    thisCart.dom.form.addEventListener('submit', function (event) {
       event.preventDefault();
       thisCart.sendOrder();
     });
   }
 
-  sendOrder(){
+  sendOrder() {
 
     const thisCart = this;
     const url = settings.db.url + '/' + settings.db.order;
@@ -70,7 +70,7 @@ class Cart {
       deliveryFee: thisCart.deliveryFee,
       products: [],
     };
-    for(let product of thisCart.products) {
+    for (let product of thisCart.products) {
       payload.products.push(product.getData());
     }
 
@@ -83,10 +83,10 @@ class Cart {
     };
 
     fetch(url, options)
-      .then(function(response) {
+      .then(function (response) {
         return response.json();
-      // eslint-disable-next-line no-unused-vars
-      }).then (function(parsedResponse){
+        // eslint-disable-next-line no-unused-vars
+      }).then(function (parsedResponse) {
       });
   }
 
@@ -107,14 +107,14 @@ class Cart {
     thisCart.subtotalPrice = 0;
 
     const cartProducts = thisCart.products;
-    for(let cartProduct of cartProducts){
+    for (let cartProduct of cartProducts) {
       thisCart.subtotalPrice += cartProduct.price;
-      thisCart.totalNumber =+ cartProduct.amount;
+      thisCart.totalNumber = + cartProduct.amount;
     }
     thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
 
-    for(let key of thisCart.renderTotalsKeys) {
-      for(let elem of thisCart.dom[key]) {
+    for (let key of thisCart.renderTotalsKeys) {
+      for (let elem of thisCart.dom[key]) {
         elem.innerHTML = thisCart[key];
       }
 

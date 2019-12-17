@@ -15,12 +15,14 @@
         ],
         "linebreak-style": [
             "error",
-            "unix"
+            "windows"
         ],
         "quotes": [
             "error",
             "single",
-            {"allowTemplateLiterals": true}
+            {
+                "allowTemplateLiterals": true
+            }
         ],
         "semi": [
             "error",
