@@ -3,7 +3,7 @@ import BaseWidget from './BaseWidget.js';
 import { utils } from '../utils.js';
 
 // eslint-disable-next-line no-unused-vars
-class DatePicker extends BaseWidget{
+class datePicker extends BaseWidget{
   constructor(wrapper){  
     super(wrapper, utils.dateToStr(new Date()));
     const thisWidget = this;
@@ -11,7 +11,7 @@ class DatePicker extends BaseWidget{
 
     thisWidget.initPlugin();
 
-    thisWidget.value = thisWidget.dom.input.value;
+    
 
   }
   initPlugin(){
@@ -53,4 +53,4 @@ class DatePicker extends BaseWidget{
   }
 
 }
-export default DatePicker;
+export default datePicker;
