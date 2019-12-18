@@ -3,7 +3,7 @@ import BaseWidget from './BaseWidget.js';
 import { utils } from '../utils.js';
 
 // eslint-disable-next-line no-unused-vars
-class datePicker extends BaseWidget{
+class DatePicker extends BaseWidget{
   constructor(wrapper){  
     super(wrapper, utils.dateToStr(new Date()));
     const thisWidget = this;
@@ -20,6 +20,10 @@ class datePicker extends BaseWidget{
 
     thisWidget.maxDate = new Date(utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture));
 
+    thisWidget.dom.input.addEventListener('input', function(){
+      thisWidget.value = thisWidget.dom.input.value;
+    });
+
     // eslint-disable-next-line no-undef
     flatpickr(thisWidget.dom.input, {
       enableTime: false,
@@ -34,7 +38,7 @@ class datePicker extends BaseWidget{
         }
       ],
       locale: {
-        'firstDayOfWeek': 2 // start week on Monday
+        'firstDayOfWeek': 1 // start week on Monday
       }
     });
   }
@@ -49,4 +53,4 @@ class datePicker extends BaseWidget{
   }
 
 }
-export default datePicker;
+export default DatePicker;
