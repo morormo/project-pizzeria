@@ -166,7 +166,7 @@ class Booking {
         thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
       });        
     }
-
+    
     thisBooking.dom.submit.addEventListener('click', function (event){
       event.preventDefault();
       thisBooking.sendBooked();
@@ -187,10 +187,22 @@ class Booking {
       bookHourPicker : thisBooking.dom.bookHourPicker.value,
       bookPeople : thisBooking.dom.bookPeople.value,
       starters: [],
+      table: [],
     };
     for(let starter of thisBooking.dom.starters) {
       if (starter.checked == true) {
         payload.starters.push(starter.value);
+      }
+    }
+    for (let table of thisBooking.dom.tables) {
+      if (table.classList.contains('selected')) {
+        thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
+        table.classList.add('booked');
+        table.classList.remove('selected');
+        if (!isNaN(thisBooking.tableId)) {
+          thisBooking.tableId = parseInt(thisBooking.tableId);
+        }
+        payload.table.push(thisBooking.tableId);
       }
     }
     const options = {
@@ -199,16 +211,17 @@ class Booking {
         'Content-Type': 'application/json', 
       },
       body: JSON.stringify(payload),
-    }
+    };
     fetch(url, options)
-      .then(function (response){
+      .then(function(response) {
         return response.json();
-      }) .then(function(parsedResponse){
+        // eslint-disable-next-line no-unused-vars
+      }).then (function(parsedResponse){
+        thisBooking.makeBooked(payload.date, payload.hour, payload.bookHourPicker, payload.table);
       });
     console.log(payload);
   }
    
-  
 
   render(element){
     const thisBooking = this;
