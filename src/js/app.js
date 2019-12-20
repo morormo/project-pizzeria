@@ -2,6 +2,8 @@ import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+// eslint-disable-next-line no-unused-vars
+import Home from './components/Home.js';
 
 const app = {
   initBooking: function(){
@@ -10,11 +12,76 @@ const app = {
     thisApp.booking = new Booking(bookingElem);
   },
 
+  initCarousel(){
+    // eslint-disable-next-line no-unused-vars
+
+    const review = [];
+
+
+    review[0] = {
+      title: 'Nulla',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      author: 'Efficitur N.',
+
+    };
+    review[1] = {
+      title: 'Vestibulum',
+      content: 'Aenean vitae quam suscipit, interdum arcu nec,',
+      author: 'Pellentesque A.',
+    };
+    review[2] = {
+      title: 'Lobortis',
+      content: 'Mauris maximus ipsum sed.',
+      author: 'Vel F.',
+    };
+    let i = 0;
+
+    const dots = document.querySelectorAll('.carousel-dots i');
+
+    function changeTitle(){
+
+      const title = document.querySelector('.review-title');
+      
+      const pean = document.querySelector('.reviev-content');
+      
+      const author = document.querySelector('.review-author');
+      
+
+      for (let dot of dots) {
+        if (dot.id == i +1) { 
+          
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+        title.innerHTML = review[i].title;
+        pean.innerHTML = review[i].content;
+        author.innerHTML = review[i].author;
+      }
+
+      if(i < review.length -1) {
+        i++;
+      } else {
+        i=0;
+      }
+    }
+    changeTitle();
+
+    setInterval(() => {
+      changeTitle();
+    }, 3000);
+  },
+
+  
+
   initPages : function() {
     const thisApp = this;
 
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    thisApp.navLinksHome = document.querySelectorAll(select.nav.linksHome);
+    
+    
   
     const idFromHash = window.location.hash.replace('#/', '');
     
@@ -27,8 +94,26 @@ const app = {
         break;
       }
     }
-
     thisApp.activatePage(pageMatchingHash);
+
+    
+    // const turnOn = document.querySelector(".main-nav");
+    for(let linkHome of thisApp.navLinksHome){
+      linkHome.addEventListener('click', function(event){
+        const clickedElement = this;
+        event.preventDefault();
+        
+        /*get page id from href attribute */
+        const id = clickedElement.getAttribute('href').replace('#', '');
+        
+        /*run thisApp.activatePage with that id */
+        thisApp.activatePage(id);
+
+        /* change URL hash */
+        window.location.hash = '#/' + id;
+        // turnOn.style.display = "block";
+      });
+    }  
 
     for(let link of thisApp.navLinks){
       link.addEventListener('click', function(event){
@@ -121,10 +206,20 @@ const app = {
 
     thisApp.initPages();
     thisApp.initBooking();
+    thisApp.initCarousel();
 
     thisApp.initData();
     //thisApp.initMenu();
     thisApp.initCart();
+
+    // const turnOn = document.querySelector(".main-nav");
+    // const homeActive = window.location.hash;
+    
+    // if(homeActive == '#/home'){
+    //   turnOn.style.display = "none";
+    // } else {
+    //   turnOn.style.display = "block";
+    // }
 
 
   },

@@ -176,7 +176,7 @@ class Booking {
   sendBooked(){
     const thisBooking = this;
     const url = settings.db.url + '/' + settings.db.booking;
-    console.log(url);
+    // console.log(url);
 
     const payload = {
       date : thisBooking.datePicker.value,
@@ -219,7 +219,7 @@ class Booking {
       }).then (function(parsedResponse){
         thisBooking.makeBooked(payload.date, payload.hour, payload.bookHourPicker, payload.table);
       });
-    console.log(payload);
+    // console.log(payload);
   }
    
 
