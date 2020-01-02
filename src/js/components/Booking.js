@@ -152,6 +152,8 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+
+    thisBooking.BgcSlider();
     //console.log(thisBooking.hour);
   }
   selectTable(){
@@ -258,6 +260,55 @@ class Booking {
       thisBooking.updateDOM();
     });
 
+  }
+  BgcSlider() {
+    const thisBooking = this;
+
+    thisBooking.dom.form.bgcSlider = thisBooking.dom.form.querySelector(select.widgets.hourPicker.rangeSlider);
+
+    const open = settings.hours.open;
+    const close = settings.hours.close;
+    const tableAmount = [];
+    const hours = [];
+    const linearStyle = [];
+    const colours = [];
+    
+
+    for (let i = open; i < close; i += 0.5){
+      hours.push(i);
+    }
+
+    for (let hour of hours) {
+      if (!thisBooking.booked[thisBooking.date][hour]) {
+        tableAmount.push(0);
+      } else {
+        tableAmount.push(thisBooking.booked[thisBooking.date][hour].length);
+      }
+    }
+
+    for (let table of tableAmount) {
+      if (table === 3) {
+        colours.push(settings.colours.red);
+      } else if (table === 2) {
+        colours.push(settings.colours.orange);
+      } else {
+        colours.push(settings.colours.green);
+      }
+    }
+
+    let avg = Math.round(100 / colours.length);
+    let auxiliary = Math.round(100 / colours.length);
+    let begin = 0;
+
+    for (let colour of colours) {
+      linearStyle.push(colour + ' ' + begin + '%' + ' ' + avg + '%');
+      begin += auxiliary;
+      avg += auxiliary;
+    }
+
+    const colorStyle = linearStyle.join(', ');
+
+    thisBooking.dom.form.bgcSlider.style.background = 'linear-gradient(to right,' + colorStyle + ')';
   }
 }
 export default Booking;

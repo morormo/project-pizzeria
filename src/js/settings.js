@@ -39,6 +39,7 @@ export const select = {
       wrapper: '.hour-picker',
       input: 'input[type="range"]',
       output: '.output',
+      rangeSlider: '.rangeSlider',
     },
   },
   // CODE ADDED START
@@ -128,6 +129,11 @@ export const settings = {
     dateEndParamKey: 'date_lte',
     notRepeatParam: 'repeat=false',
     repeatParam: 'repeat_ne=false',
+  },
+  colours: {
+    red: 'red',
+    orange: 'orange',
+    green: 'green',
   },
 };
 
