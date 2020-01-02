@@ -247,6 +247,7 @@ class Booking {
     thisBooking.dom.bookPeople = thisBooking.dom.wrapper.querySelector(select.booking.bookPeople);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
   }
+  
   initWidgets(){
     const thisBooking = this;
 
