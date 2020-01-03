@@ -246,6 +246,7 @@ class Booking {
     thisBooking.dom.bookHourPicker = thisBooking.dom.wrapper.querySelector(select.booking.bookHourPicker);
     thisBooking.dom.bookPeople = thisBooking.dom.wrapper.querySelector(select.booking.bookPeople);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.form = thisBooking.dom.wrapper.querySelector('.booking-form');
   }
   
   initWidgets(){
