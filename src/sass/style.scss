@@ -1,16 +1,157 @@
-@import 'partials/settings';
-@import 'partials/typography';
-@import 'partials/global';
-@import 'partials/elements';
+/* Variables */
+$color-menu: #191919;
+$color-red: #d52a2a;
 
-@import 'partials/header';
-@import 'partials/cart';
+/* Fonts */
+@font-face{font-family: Manrope; src:url(../vendor/manrope-regular.otf);}
 
-@import 'partials/product';
-@import 'partials/booking';
-@import 'partials/home';
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Manrope';
+}
 
+a {
+  text-decoration: none;
+  color: $color-menu;
+}
 
-.rangeSlider__fill {
-  background: hsla(0,0%,100%,0);
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.left-side {
+  flex: 0 0 16.6666666667%;
+  max-width: 16.6666666667%;
+  box-shadow: 1px 0 0 0 #e4e4e4;
+  
+
+  .logo {
+    font-size: 48px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: -0.2px;
+    text-align: center;
+    margin-top: 48px;
+    cursor: pointer;
+    
+
+    .firstLetter {
+      color: $color-red;
+    }
+  }
+}
+
+.right-side {
+  flex: 0 0 83.3333333333%;
+  max-width: 83.3333333333%;
+
+  .menu {
+    height: 10%;
+    width: 100%;
+    margin-top: 64px;
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: 0.2px;
+    padding-left: 7.6%;
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    
+      li {
+        display: inline-block;
+        margin: 0 0 0 40px;
+      }
+
+      li:last-child {
+        float: right;
+        padding-right: 9.5%;
+      }
+    }
+  }
+
+  .join {
+    width: 100%;
+
+    .main {
+      padding-left: 7.6%;
+
+      .title {
+        padding-top: 224px;
+        font-weight: bold;
+        
+
+        /* .Preheading {
+          float: left;
+          margin-top: 1.3%;
+        }*/
+
+        .Photo {
+          position: absolute;
+          right: 7.8%;
+          z-index: -1;
+          top: 128px;
+        }
+        
+        .titleText {
+          float: left;
+          font-size: 56px;
+          line-height: 72px;
+          font-weight: bold;
+          text-align: center;
+
+          i {
+            color: $color-red;
+          }
+          
+        }
+      }
+
+      .subtitle {
+        clear: both;
+        padding: 40px 0;
+        font-size: 16px;
+        letter-spacing: -0,2px;
+      }
+
+      .btn-red {
+        background: $color-red;
+        width: 228px;
+        line-height: 64px; 
+        color: white;
+        border: 0;
+        font-size: 16px;
+        letter-spacing: -0,2px;
+        cursor: pointer; 
+        
+        i {
+          margin-left: 12px;
+        }
+      }
+      .roll {
+        font-family: Manrope;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.5;
+        letter-spacing: -0.2px;
+        color: #757575;
+        margin-top: 150px;
+        
+        i {
+          margin-right: 16px;
+        }
+      }
+    }
+  }
+
 }
